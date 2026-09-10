@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List - POO</title>
+
+  <!-- Única dependencia externa: W3.CSS -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="app-body">
+  <main class="w3-content app-container">
+    <section class="w3-card app-card">
+      <header class="app-header">
+        <div>
+          <p class="app-kicker">GESTIÓN DE TAREAS</p>
+          <h1 class="app-title">Todo List</h1>
+          <p class="app-subtitle">
+            JavaScript Vanilla · POO · LocalStorage · W3.CSS
+          </p>
+        </div>
+
+        <div class="app-counter">
+          <span id="pendingCount">0</span>
+          <small>Pendientes</small>
+        </div>
+      </header>
+
+      <section class="task-form-section">
+        <form id="taskForm" class="w3-container task-form" novalidate>
+          <div class="form-grid">
+            <div>
+              <label for="title" class="form-label">Tarea</label>
+              <input
+                id="title"
+                name="title"
+                class="w3-input app-input"
+                type="text"
+                maxlength="100"
+                placeholder="Ej.: Terminar trabajo práctico"
+                required
+              >
+              <small id="titleError" class="form-error" aria-live="polite"></small>
+            </div>
+
+            <div>
+              <label for="priority" class="form-label">Prioridad</label>
+              <select id="priority" name="priority" class="w3-select app-input" required>
+                <option value="High">High</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="Low">Low</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="w3-button w3-round-large primary-button">
+              Agregar tarea
+            </button>
+
+            <button
+              id="clearCompletedButton"
+              type="button"
+              class="w3-button w3-round-large secondary-button"
+            >
+              Borrar finalizadas
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="table-section">
+        <div class="table-toolbar">
+          <div>
+            <h2 class="section-title">Tareas</h2>
+            <p id="taskSummary" class="section-subtitle">No hay tareas registradas.</p>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="w3-table w3-bordered app-table">
+            <thead>
+              <tr>
+                <th>Tarea</th>
+                <th>Prioridad</th>
+                <th>Estado</th>
+                <th class="actions-column">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="taskTableBody"></tbody>
+          </table>
+        </div>
+
+        <div id="emptyState" class="empty-state">
+          <div class="empty-state-icon">✓</div>
+          <h3>No hay tareas</h3>
+          <p>Agregá una tarea para comenzar.</p>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <!-- Modal de edición -->
+  <div id="editModal" class="w3-modal" aria-hidden="true">
+    <div class="w3-modal-content w3-card-4 app-modal">
+      <header class="modal-header">
+        <div>
+          <p class="app-kicker">EDITAR</p>
+          <h2 class="modal-title">Modificar tarea</h2>
+        </div>
+
+        <button
+          id="closeEditModalButton"
+          type="button"
+          class="w3-button modal-close-button"
+          aria-label="Cerrar"
+        >
+          ×
+        </button>
+      </header>
+
+      <form id="editTaskForm" class="w3-container modal-form" novalidate>
+        <input id="editTaskId" type="hidden">
+
+        <div>
+          <label for="editTitle" class="form-label">Tarea</label>
+          <input
+            id="editTitle"
+            class="w3-input app-input"
+            type="text"
+            maxlength="100"
+            required
+          >
+          <small id="editTitleError" class="form-error" aria-live="polite"></small>
+        </div>
+
+        <div class="modal-field">
+          <label for="editPriority" class="form-label">Prioridad</label>
+          <select id="editPriority" class="w3-select app-input" required>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+        </div>
+
+        <div class="modal-actions">
+          <button
+            id="cancelEditButton"
+            type="button"
+            class="w3-button w3-round-large secondary-button"
+          >
+            Cancelar
+          </button>
+
+          <button
+            type="submit"
+            class="w3-button w3-round-large primary-button"
+          >
+            Guardar cambios
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal de confirmación -->
+  <div id="confirmModal" class="w3-modal" aria-hidden="true">
+    <div class="w3-modal-content w3-card-4 app-modal confirm-modal">
+      <header class="modal-header">
+        <div>
+          <p class="app-kicker">CONFIRMAR</p>
+          <h2 id="confirmTitle" class="modal-title">Eliminar tarea</h2>
+        </div>
+      </header>
+
+      <div class="w3-container modal-form">
+        <p id="confirmMessage" class="confirm-message"></p>
+
+        <div class="modal-actions">
+          <button
+            id="cancelConfirmButton"
+            type="button"
+            class="w3-button w3-round-large secondary-button"
+          >
+            Cancelar
+          </button>
+
+          <button
+            id="acceptConfirmButton"
+            type="button"
+            class="w3-button w3-round-large danger-button"
+          >
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
