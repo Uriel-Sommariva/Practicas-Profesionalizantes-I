@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!--!
+    @file index.html
+    @brief Estructura principal de la aplicación Todo List.
+    @details El documento contiene únicamente estructura HTML. La lógica está en app.js y los estilos propios en styles.css.
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List - Refactoring POO</title>
+
+  <!--! @brief Única dependencia externa permitida: W3.CSS. -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+
+  <!--! @brief Hoja de estilos propia de la aplicación. -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="app-body">
+  <!--! @brief Contenedor principal de la aplicación. -->
+  <main class="w3-content app-container">
+    <section class="w3-card app-card">
+      <!--! @brief Cabecera principal y contador de tareas pendientes. -->
+      <header class="app-header">
+        <div>
+          <p class="app-kicker">TASK MANAGEMENT</p>
+          <h1 class="app-title">Todo List</h1>
+          <p class="app-subtitle">Vanilla JavaScript · OOP · LocalStorage · W3.CSS</p>
+        </div>
+        <div class="app-counter" aria-label="Pending tasks">
+          <span id="pendingCount">0</span>
+          <small>Pending</small>
+        </div>
+      </header>
+
+      <!--! @brief Formulario para crear una nueva tarea. -->
+      <section class="task-form-section">
+        <form id="taskForm" class="w3-container task-form" novalidate>
+          <div class="form-grid">
+            <div>
+              <label for="title" class="form-label">Task</label>
+              <input id="title" name="title" class="w3-input app-input" type="text" maxlength="100" placeholder="Example: Finish practical assignment" required>
+              <small id="titleError" class="form-error" aria-live="polite"></small>
+            </div>
+            <div>
+              <label for="priority" class="form-label">Priority</label>
+              <select id="priority" name="priority" class="w3-select app-input" required>
+                <option value="High">High</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="Low">Low</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="w3-button w3-round-large primary-button">Add task</button>
+            <button id="clearCompletedButton" type="button" class="w3-button w3-round-large secondary-button">Delete completed</button>
+          </div>
+        </form>
+      </section>
+
+      <!--! @brief Tabla principal de tareas. Las filas se generan mediante la API DOM. -->
+      <section class="table-section">
+        <div class="table-toolbar">
+          <div>
+            <h2 class="section-title">Tasks</h2>
+            <p id="taskSummary" class="section-subtitle">No tasks registered.</p>
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <table class="w3-table w3-bordered app-table">
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th class="actions-column">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="taskTableBody"></tbody>
+          </table>
+        </div>
+
+        <!--! @brief Estado vacío visible cuando no hay tareas. -->
+        <div id="emptyState" class="empty-state">
+          <div class="empty-state-icon">✓</div>
+          <h3>No tasks</h3>
+          <p>Add a task to get started.</p>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <!--! @brief Modal para editar una tarea existente. -->
+  <div id="editModal" class="w3-modal" aria-hidden="true">
+    <div class="w3-modal-content w3-card-4 app-modal">
+      <header class="modal-header">
+        <div>
+          <p class="app-kicker">EDIT</p>
+          <h2 class="modal-title">Update task</h2>
+        </div>
+        <button id="closeEditModalButton" type="button" class="w3-button modal-close-button" aria-label="Close">×</button>
+      </header>
+      <form id="editTaskForm" class="w3-container modal-form" novalidate>
+        <input id="editTaskId" type="hidden">
+        <div>
+          <label for="editTitle" class="form-label">Task</label>
+          <input id="editTitle" class="w3-input app-input" type="text" maxlength="100" required>
+          <small id="editTitleError" class="form-error" aria-live="polite"></small>
+        </div>
+        <div class="modal-field">
+          <label for="editPriority" class="form-label">Priority</label>
+          <select id="editPriority" class="w3-select app-input" required>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+        </div>
+        <div class="modal-actions">
+          <button id="cancelEditButton" type="button" class="w3-button w3-round-large secondary-button">Cancel</button>
+          <button type="submit" class="w3-button w3-round-large primary-button">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!--! @brief Modal genérico para confirmar operaciones destructivas. -->
+  <div id="confirmModal" class="w3-modal" aria-hidden="true">
+    <div class="w3-modal-content w3-card-4 app-modal confirm-modal">
+      <header class="modal-header">
+        <div>
+          <p class="app-kicker">CONFIRM</p>
+          <h2 id="confirmTitle" class="modal-title">Delete task</h2>
+        </div>
+      </header>
+      <div class="w3-container modal-form">
+        <p id="confirmMessage" class="confirm-message"></p>
+        <div class="modal-actions">
+          <button id="cancelConfirmButton" type="button" class="w3-button w3-round-large secondary-button">Cancel</button>
+          <button id="acceptConfirmButton" type="button" class="w3-button w3-round-large danger-button">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--! @brief Punto de entrada de la lógica de la aplicación. -->
+  <script src="app.js"></script>
+</body>
+</html>
