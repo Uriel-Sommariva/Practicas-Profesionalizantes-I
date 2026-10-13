@@ -1,0 +1,533 @@
+<!-- Indica que el documento utiliza HTML5. -->
+<!DOCTYPE html>
+
+<!-- Abre el documento HTML y define que el idioma es español. -->
+<html lang="es">
+
+<!-- Contiene configuraciones de la página que no se muestran directamente. -->
+<head>
+
+    <!-- Define la codificación UTF-8 para admitir tildes, ñ y símbolos. -->
+    <meta charset="UTF-8">
+
+    <!-- Hace que la página se adapte correctamente al tamaño de la pantalla. -->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <!-- Define el título que aparece en la pestaña del navegador. -->
+    <title>Dungeon Warriors</title>
+
+    <!-- Conecta este HTML con el archivo styles.css. -->
+    <link
+        rel="stylesheet"
+        href="styles.css"
+    >
+
+<!-- Finaliza la configuración de la página. -->
+</head>
+
+<!-- Comienza todo el contenido visible de la página. -->
+<body>
+
+    <!-- Contenedor principal de todo el juego. -->
+    <main class="game-container">
+
+        <!-- Muestra el título principal del juego. -->
+        <h1>⚔️ Dungeon Warriors</h1>
+
+
+        <!-- ====================================== -->
+        <!-- SELECCIÓN INICIAL -->
+        <!-- ====================================== -->
+
+        <!-- Panel utilizado antes de comenzar la partida. -->
+        <section
+            id="setupPanel"
+            class="panel"
+        >
+
+            <!-- Título del menú de selección. -->
+            <h2>Elegir personaje</h2>
+
+            <!-- Contenedor que muestra el icono de la clase seleccionada. -->
+            <div
+                id="classIllustration"
+                class="class-illustration"
+            >
+                <!-- Icono inicial del Caballero. -->
+                🛡️
+            </div>
+
+
+            <!-- Etiqueta correspondiente al selector de clases. -->
+            <label for="classSelect">
+                Clase
+            </label>
+
+            <!-- Selector donde el jugador puede elegir una clase. -->
+            <select id="classSelect">
+
+                <!-- Primera opción: Caballero. -->
+                <option value="0">
+                    Caballero
+                </option>
+
+                <!-- Segunda opción: Mago. -->
+                <option value="1">
+                    Mago
+                </option>
+
+                <!-- Tercera opción: Arquero. -->
+                <option value="2">
+                    Arquero
+                </option>
+
+            <!-- Finaliza el selector de clases. -->
+            </select>
+
+
+            <!-- Muestra la descripción de la clase seleccionada. -->
+            <div
+                id="classInformation"
+                class="information"
+            ></div>
+
+
+            <!-- Contenedor donde se muestra el icono del arma seleccionada. -->
+            <div
+                id="weaponIllustration"
+                class="weapon-illustration"
+            >
+                <!-- Icono inicial de la espada. -->
+                ⚔️
+            </div>
+
+
+            <!-- Etiqueta del selector de arma inicial. -->
+            <label for="startWeaponSelect">
+                Arma inicial
+            </label>
+
+            <!--
+                Selector de armas.
+
+                Está vacío porque las opciones
+                se crean desde JavaScript.
+            -->
+            <select id="startWeaponSelect"></select>
+
+
+            <!-- Muestra información del arma seleccionada. -->
+            <div
+                id="weaponInformation"
+                class="information"
+            ></div>
+
+
+            <!-- Botón utilizado para comenzar una nueva partida. -->
+            <button
+                id="startButton"
+                type="button"
+            >
+                Comenzar partida
+            </button>
+
+        <!-- Finaliza el panel de selección. -->
+        </section>
+
+
+        <!-- ====================================== -->
+        <!-- HUD -->
+        <!-- ====================================== -->
+
+        <!--
+            HUD significa Heads-Up Display.
+
+            Muestra información del jugador
+            durante la partida.
+        -->
+        <section
+            id="hud"
+            class="hud hidden"
+        >
+
+            <!-- Muestra la clase elegida. -->
+            <div>
+                <strong>Clase:</strong>
+                <span id="className"></span>
+            </div>
+
+            <!-- Muestra el nivel actual. -->
+            <div>
+                <strong>Nivel:</strong>
+                <span id="level"></span>
+            </div>
+
+            <!-- Muestra la vida actual y máxima. -->
+            <div>
+                <strong>Vida:</strong>
+                <span id="health"></span>
+            </div>
+
+            <!-- Muestra el arma actualmente equipada. -->
+            <div>
+                <strong>Arma:</strong>
+                <span id="weaponName"></span>
+            </div>
+
+            <!-- Muestra el daño del arma más las mejoras. -->
+            <div>
+                <strong>Daño base:</strong>
+                <span id="baseDamage"></span>
+            </div>
+
+            <!-- Muestra el daño final después del bonus de clase. -->
+            <div>
+                <strong>Daño final:</strong>
+                <span id="finalDamage"></span>
+            </div>
+
+            <!-- Indica si el bonus de clase está activo. -->
+            <div>
+                <strong>Bonus:</strong>
+                <span id="bonusStatus"></span>
+            </div>
+
+            <!-- Muestra la dificultad actual. -->
+            <div>
+                <strong>Dificultad:</strong>
+                <span id="difficulty"></span>
+            </div>
+
+            <!-- Muestra la puntuación obtenida. -->
+            <div>
+                <strong>Puntos:</strong>
+                <span id="score"></span>
+            </div>
+
+        <!-- Finaliza el HUD. -->
+        </section>
+
+
+        <!-- ====================================== -->
+        <!-- EXPERIENCIA -->
+        <!-- ====================================== -->
+
+        <!-- Panel donde se muestra la experiencia del jugador. -->
+        <section
+            id="xpPanel"
+            class="xp-panel hidden"
+        >
+
+            <!-- Parte superior de la barra de experiencia. -->
+            <div class="xp-header">
+
+                <!-- Nombre del indicador. -->
+                <strong>Experiencia</strong>
+
+                <!-- Muestra experiencia actual / experiencia necesaria. -->
+                <span id="xpText">
+                    0 / 180
+                </span>
+
+            <!-- Finaliza la cabecera de experiencia. -->
+            </div>
+
+
+            <!-- Fondo completo de la barra de experiencia. -->
+            <div class="xp-bar">
+
+                <!--
+                    Parte azul de la barra.
+
+                    Su ancho cambia desde JavaScript
+                    según la experiencia conseguida.
+                -->
+                <div
+                    id="xpFill"
+                    class="xp-fill"
+                ></div>
+
+            <!-- Finaliza la barra de experiencia. -->
+            </div>
+
+
+            <!-- Muestra los niveles actuales de las mejoras. -->
+            <div class="upgrade-levels">
+
+                <!-- Nivel actual de Vitalidad. -->
+                <span>
+                    ❤️ Vitalidad:
+                    <strong id="vitalityLevel">
+                        0/5
+                    </strong>
+                </span>
+
+                <!-- Nivel actual de Daño. -->
+                <span>
+                    ⚔️ Daño:
+                    <strong id="damageLevel">
+                        0/5
+                    </strong>
+                </span>
+
+            <!-- Finaliza información de mejoras. -->
+            </div>
+
+        <!-- Finaliza panel de experiencia. -->
+        </section>
+
+
+        <!-- ====================================== -->
+        <!-- ARMAS -->
+        <!-- ====================================== -->
+
+        <!-- Panel utilizado para cambiar de arma durante la partida. -->
+        <section
+            id="weaponPanel"
+            class="weapon-panel hidden"
+        >
+
+            <!-- Muestra el icono del arma equipada. -->
+            <span
+                id="currentWeaponIllustration"
+                class="current-weapon"
+            >
+                ⚔️
+            </span>
+
+
+            <!-- Selector de armas disponibles. -->
+            <select id="weaponSelect"></select>
+
+
+            <!-- Botón para equipar el arma seleccionada. -->
+            <button
+                id="changeWeaponButton"
+                type="button"
+            >
+                Cambiar arma
+            </button>
+
+
+            <!-- Indica que también puede utilizarse la rueda del mouse. -->
+            <span>
+                🖱️ Rueda = cambiar arma
+            </span>
+
+        <!-- Finaliza panel de armas. -->
+        </section>
+
+
+        <!-- ====================================== -->
+        <!-- JUEGO -->
+        <!-- ====================================== -->
+
+        <!--
+            Canvas donde JavaScript dibuja:
+            jugador,
+            enemigos,
+            ataques,
+            armas,
+            XP,
+            explosiones,
+            etc.
+        -->
+        <canvas
+            id="gameCanvas"
+            width="900"
+            height="560"
+            class="hidden"
+        ></canvas>
+
+
+        <!-- ====================================== -->
+        <!-- SUBIDA DE NIVEL -->
+        <!-- ====================================== -->
+
+        <!-- Panel mostrado cuando el jugador completa una barra de XP. -->
+        <section
+            id="upgradePanel"
+            class="upgrade-panel hidden"
+        >
+
+            <!-- Título del menú. -->
+            <h2>⭐ ¡Subiste de nivel!</h2>
+
+            <!-- Instrucción. -->
+            <p>
+                Elegí una mejora:
+            </p>
+
+
+            <!-- Contenedor de todas las mejoras disponibles. -->
+            <div class="upgrade-options">
+
+                <!-- Botón para mejorar Vitalidad. -->
+                <button
+                    id="vitalityUpgradeButton"
+                    class="upgrade-option"
+                    type="button"
+                >
+
+                    <!-- Nombre de la mejora. -->
+                    <strong>
+                        ❤️ Vitalidad
+                    </strong>
+
+                    <!-- Descripción actualizada desde JavaScript. -->
+                    <span id="vitalityUpgradeText">
+                        Aumenta la vida máxima.
+                    </span>
+
+                <!-- Finaliza botón de Vitalidad. -->
+                </button>
+
+
+                <!-- Botón para mejorar Daño. -->
+                <button
+                    id="damageUpgradeButton"
+                    class="upgrade-option"
+                    type="button"
+                >
+
+                    <!-- Nombre de la mejora. -->
+                    <strong>
+                        ⚔️ Daño
+                    </strong>
+
+                    <!-- Descripción actualizada desde JavaScript. -->
+                    <span id="damageUpgradeText">
+                        Aumenta el daño base.
+                    </span>
+
+                <!-- Finaliza botón de Daño. -->
+                </button>
+
+
+                <!-- Botón para recuperar completamente la vida. -->
+                <button
+                    id="healUpgradeButton"
+                    class="upgrade-option"
+                    type="button"
+                >
+
+                    <!-- Nombre. -->
+                    <strong>
+                        💚 Curación completa
+                    </strong>
+
+                    <!-- Descripción. -->
+                    <span>
+                        Recupera toda tu vida.
+                    </span>
+
+                <!-- Finaliza botón de curación. -->
+                </button>
+
+            <!-- Finaliza contenedor de mejoras. -->
+            </div>
+
+        <!-- Finaliza panel de mejoras. -->
+        </section>
+
+
+        <!-- ====================================== -->
+        <!-- GAME OVER -->
+        <!-- ====================================== -->
+
+        <!-- Panel mostrado cuando la vida llega a cero. -->
+        <section
+            id="gameOverPanel"
+            class="game-over hidden"
+        >
+
+            <!-- Título de derrota. -->
+            <h2>💀 Game Over</h2>
+
+            <!-- Muestra la puntuación final. -->
+            <p id="finalScore"></p>
+
+            <!-- Muestra el nivel alcanzado. -->
+            <p id="finalLevel"></p>
+
+
+            <!-- Botón para comenzar nuevamente con la misma configuración. -->
+            <button
+                id="retryButton"
+                type="button"
+            >
+                🔄 Reintentar
+            </button>
+
+
+            <!-- Botón para volver al menú inicial. -->
+            <button
+                id="changeCharacterButton"
+                type="button"
+            >
+                🧙 Cambiar clase o arma
+            </button>
+
+        <!-- Finaliza Game Over. -->
+        </section>
+
+
+        <!-- ====================================== -->
+        <!-- CONTROLES -->
+        <!-- ====================================== -->
+
+        <!-- Muestra una guía de controles. -->
+        <section
+            id="controls"
+            class="controls hidden"
+        >
+
+            <!-- Controles de movimiento. -->
+            <p>
+                Movimiento:
+                <strong>W A S D</strong>
+            </p>
+
+            <!-- Control de ataque. -->
+            <p>
+                Ataque:
+                <strong>Clic izquierdo</strong>
+            </p>
+
+            <!-- Control para cambiar arma. -->
+            <p>
+                Arma:
+                <strong>Rueda</strong>
+            </p>
+
+            <!-- Explicación de experiencia. -->
+            <p>
+                XP:
+                <strong>Recoger esferas</strong>
+            </p>
+
+        <!-- Finaliza controles. -->
+        </section>
+
+
+        <!-- Muestra mensajes del juego. -->
+        <p
+            id="message"
+            class="message"
+        ></p>
+
+    <!-- Finaliza el contenedor principal. -->
+    </main>
+
+
+    <!-- Conecta este HTML con el archivo app.js. -->
+    <script src="app.js"></script>
+
+<!-- Finaliza el contenido visible. -->
+</body>
+
+<!-- Finaliza el documento HTML. -->
+</html>

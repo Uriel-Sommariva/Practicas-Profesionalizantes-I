@@ -1,0 +1,633 @@
+/* Selecciona todos los elementos de la página. */
+* {
+
+    /* Hace que padding y border estén incluidos en el tamaño final. */
+    box-sizing: border-box;
+}
+
+
+/* Selecciona todo el cuerpo de la página. */
+body {
+
+    /* Elimina el margen predeterminado del navegador. */
+    margin: 0;
+
+    /* Hace que la página tenga como mínimo la altura completa de la pantalla. */
+    min-height: 100vh;
+
+    /* Establece el fondo oscuro principal. */
+    background-color: #101014;
+
+    /* Define el color blanco para el texto general. */
+    color: white;
+
+    /* Define la fuente utilizada. */
+    font-family: Arial, sans-serif;
+
+    /* Activa Flexbox. */
+    display: flex;
+
+    /* Centra horizontalmente el contenido. */
+    justify-content: center;
+
+    /* Agrega espacio entre el contenido y los bordes de la pantalla. */
+    padding: 30px;
+}
+
+
+/* Selecciona el contenedor principal del juego. */
+.game-container {
+
+    /* Define el ancho principal. */
+    width: 950px;
+
+    /* Evita que supere el ancho disponible de la pantalla. */
+    max-width: 100%;
+}
+
+
+/* Selecciona el título h1. */
+h1 {
+
+    /* Centra horizontalmente el texto. */
+    text-align: center;
+
+    /* Agrega separación inferior. */
+    margin-bottom: 25px;
+}
+
+
+/* Selecciona el panel inicial. */
+.panel {
+
+    /* Define un ancho fijo. */
+    width: 470px;
+
+    /* Evita que exceda el ancho disponible. */
+    max-width: 100%;
+
+    /* Centra horizontalmente el panel. */
+    margin: auto;
+
+    /* Establece el fondo del panel. */
+    background-color: #202027;
+
+    /* Agrega espacio interior. */
+    padding: 30px;
+
+    /* Redondea las esquinas. */
+    border-radius: 12px;
+
+    /* Activa Flexbox. */
+    display: flex;
+
+    /* Coloca los elementos uno debajo del otro. */
+    flex-direction: column;
+
+    /* Agrega separación entre cada elemento. */
+    gap: 12px;
+
+    /* Agrega una sombra alrededor del panel. */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+}
+
+
+/* Selecciona el cuadro con la ilustración de la clase. */
+.class-illustration {
+
+    /* Define el tamaño del emoji. */
+    font-size: 90px;
+
+    /* Centra el emoji. */
+    text-align: center;
+
+    /* Define el fondo. */
+    background-color: #15151a;
+
+    /* Redondea las esquinas. */
+    border-radius: 10px;
+
+    /* Agrega espacio interior. */
+    padding: 20px;
+}
+
+
+/* Selecciona el cuadro de ilustración del arma. */
+.weapon-illustration {
+
+    /* Define el tamaño del emoji del arma. */
+    font-size: 65px;
+
+    /* Centra el contenido. */
+    text-align: center;
+
+    /* Define el fondo. */
+    background-color: #15151a;
+
+    /* Redondea las esquinas. */
+    border-radius: 10px;
+
+    /* Agrega espacio interior. */
+    padding: 12px;
+}
+
+
+/* Selecciona todas las etiquetas label. */
+label {
+
+    /* Coloca el texto en negrita. */
+    font-weight: bold;
+}
+
+
+/* Selecciona los cuadros informativos. */
+.information {
+
+    /* Define un fondo oscuro. */
+    background-color: #15151a;
+
+    /* Agrega espacio interior. */
+    padding: 12px;
+
+    /* Redondea las esquinas. */
+    border-radius: 6px;
+
+    /* Mantiene el tamaño del texto en 16 píxeles. */
+    font-size: 16px;
+
+    /* Define el espacio vertical entre líneas. */
+    line-height: 1.5;
+}
+
+
+/* Selecciona únicamente la información del arma. */
+#weaponInformation {
+
+    /* Mantiene siempre la misma altura. */
+    height: 95px;
+
+    /* Evita que pueda reducirse por debajo de 95 píxeles. */
+    min-height: 95px;
+
+    /* Activa Flexbox. */
+    display: flex;
+
+    /* Centra el texto verticalmente. */
+    align-items: center;
+
+    /* Oculta cualquier contenido que exceda el recuadro. */
+    overflow: hidden;
+}
+
+
+/* Selecciona todos los elementos select. */
+select {
+
+    /* Agrega espacio interior. */
+    padding: 10px;
+
+    /* Redondea las esquinas. */
+    border-radius: 6px;
+
+    /* Elimina el borde predeterminado. */
+    border: none;
+
+    /* Define el tamaño del texto. */
+    font-size: 16px;
+
+    /* Define fondo claro. */
+    background-color: #eeeeee;
+
+    /* Define texto oscuro. */
+    color: #111111;
+}
+
+
+/* Selecciona todos los botones. */
+button {
+
+    /* Agrega espacio interior. */
+    padding: 12px;
+
+    /* Elimina el borde. */
+    border: none;
+
+    /* Redondea las esquinas. */
+    border-radius: 6px;
+
+    /* Cambia el cursor al pasar por encima. */
+    cursor: pointer;
+
+    /* Define tamaño del texto. */
+    font-size: 16px;
+
+    /* Suaviza los cambios visuales. */
+    transition: 0.15s;
+}
+
+
+/* Se aplica cuando el mouse pasa sobre un botón. */
+button:hover {
+
+    /* Agranda ligeramente el botón. */
+    transform: scale(1.03);
+
+    /* Reduce ligeramente su opacidad. */
+    opacity: 0.9;
+}
+
+
+/* Selecciona únicamente el botón de comenzar. */
+#startButton {
+
+    /* Define fondo verde. */
+    background-color: #3e9b5f;
+
+    /* Define texto blanco. */
+    color: white;
+}
+
+
+/* Selecciona el HUD. */
+.hud {
+
+    /* Activa Flexbox. */
+    display: flex;
+
+    /* Distribuye los elementos horizontalmente. */
+    justify-content: space-between;
+
+    /* Permite que pasen a otra fila. */
+    flex-wrap: wrap;
+
+    /* Agrega separación. */
+    gap: 15px;
+
+    /* Define fondo. */
+    background-color: #202027;
+
+    /* Agrega espacio interior. */
+    padding: 15px;
+
+    /* Redondea las esquinas. */
+    border-radius: 8px;
+
+    /* Agrega separación inferior. */
+    margin-bottom: 10px;
+}
+
+
+/* Selecciona el panel de experiencia. */
+.xp-panel {
+
+    /* Define fondo. */
+    background-color: #202027;
+
+    /* Agrega espacio interior. */
+    padding: 12px;
+
+    /* Redondea las esquinas. */
+    border-radius: 8px;
+
+    /* Agrega separación inferior. */
+    margin-bottom: 10px;
+}
+
+
+/* Selecciona la parte superior del panel de experiencia. */
+.xp-header {
+
+    /* Activa Flexbox. */
+    display: flex;
+
+    /* Coloca un elemento en cada extremo. */
+    justify-content: space-between;
+
+    /* Agrega separación debajo. */
+    margin-bottom: 7px;
+}
+
+
+/* Selecciona el fondo de la barra de experiencia. */
+.xp-bar {
+
+    /* Hace que ocupe todo el ancho disponible. */
+    width: 100%;
+
+    /* Define la altura. */
+    height: 18px;
+
+    /* Define el fondo oscuro. */
+    background-color: #111116;
+
+    /* Redondea la barra. */
+    border-radius: 20px;
+
+    /* Evita que la barra interior salga del borde. */
+    overflow: hidden;
+
+    /* Agrega un borde. */
+    border: 1px solid #414150;
+}
+
+
+/* Selecciona la parte llena de la barra. */
+.xp-fill {
+
+    /* Comienza vacía. */
+    width: 0%;
+
+    /* Ocupa toda la altura del contenedor. */
+    height: 100%;
+
+    /* Aplica un degradado azul. */
+    background: linear-gradient(
+        90deg,
+        #3d7cff,
+        #74c9ff
+    );
+
+    /* Suaviza el movimiento de la barra. */
+    transition: width 0.2s;
+}
+
+
+/* Contenedor de niveles de mejoras. */
+.upgrade-levels {
+
+    /* Activa Flexbox. */
+    display: flex;
+
+    /* Agrega separación. */
+    gap: 25px;
+
+    /* Agrega margen superior. */
+    margin-top: 8px;
+
+    /* Permite varias filas. */
+    flex-wrap: wrap;
+}
+
+
+/* Panel utilizado para cambiar de arma. */
+.weapon-panel {
+
+    /* Activa Flexbox. */
+    display: flex;
+
+    /* Centra verticalmente los elementos. */
+    align-items: center;
+
+    /* Agrega separación. */
+    gap: 10px;
+
+    /* Permite varias filas. */
+    flex-wrap: wrap;
+
+    /* Define fondo. */
+    background-color: #202027;
+
+    /* Agrega espacio interior. */
+    padding: 10px;
+
+    /* Agrega margen inferior. */
+    margin-bottom: 10px;
+
+    /* Redondea las esquinas. */
+    border-radius: 8px;
+}
+
+
+/* Icono del arma equipada. */
+.current-weapon {
+
+    /* Define tamaño grande. */
+    font-size: 32px;
+}
+
+
+/* Botón utilizado para cambiar arma. */
+#changeWeaponButton {
+
+    /* Define fondo azul. */
+    background-color: #367ac2;
+
+    /* Define texto blanco. */
+    color: white;
+}
+
+
+/* Selecciona el canvas del juego. */
+canvas {
+
+    /* Hace que se comporte como bloque. */
+    display: block;
+
+    /* Ocupa todo el ancho disponible. */
+    width: 100%;
+
+    /* Define fondo oscuro. */
+    background-color: #18181d;
+
+    /* Agrega borde. */
+    border: 3px solid #32323a;
+
+    /* Redondea las esquinas. */
+    border-radius: 8px;
+
+    /* Muestra una mira como cursor. */
+    cursor: crosshair;
+}
+
+
+/* Panel mostrado al subir de nivel. */
+.upgrade-panel {
+
+    /* Define fondo. */
+    background-color: #24242d;
+
+    /* Agrega borde amarillo. */
+    border: 2px solid #ffd95a;
+
+    /* Redondea las esquinas. */
+    border-radius: 12px;
+
+    /* Agrega espacio interior. */
+    padding: 20px;
+
+    /* Agrega separación superior. */
+    margin-top: 15px;
+
+    /* Centra el texto. */
+    text-align: center;
+
+    /* Agrega brillo amarillo. */
+    box-shadow: 0 0 25px rgba(255, 217, 90, 0.2);
+}
+
+
+/* Contenedor de las mejoras. */
+.upgrade-options {
+
+    /* Utiliza Grid. */
+    display: grid;
+
+    /* Crea tres columnas iguales. */
+    grid-template-columns: repeat(3, 1fr);
+
+    /* Agrega separación. */
+    gap: 12px;
+}
+
+
+/* Cada botón de mejora. */
+.upgrade-option {
+
+    /* Define fondo. */
+    background-color: #343441;
+
+    /* Define texto blanco. */
+    color: white;
+
+    /* Activa Flexbox. */
+    display: flex;
+
+    /* Coloca contenido verticalmente. */
+    flex-direction: column;
+
+    /* Agrega separación. */
+    gap: 8px;
+
+    /* Mantiene una altura mínima. */
+    min-height: 100px;
+
+    /* Centra verticalmente. */
+    justify-content: center;
+}
+
+
+/* Efecto al pasar sobre una mejora. */
+.upgrade-option:hover {
+
+    /* Cambia el fondo. */
+    background-color: #464658;
+}
+
+
+/* Panel de controles. */
+.controls {
+
+    /* Activa Flexbox. */
+    display: flex;
+
+    /* Centra horizontalmente. */
+    justify-content: center;
+
+    /* Permite varias filas. */
+    flex-wrap: wrap;
+
+    /* Agrega separación. */
+    gap: 30px;
+
+    /* Define fondo. */
+    background-color: #202027;
+
+    /* Redondea. */
+    border-radius: 8px;
+
+    /* Agrega margen superior. */
+    margin-top: 10px;
+
+    /* Agrega espacio horizontal. */
+    padding: 0 10px;
+}
+
+
+/* Mensaje del juego. */
+.message {
+
+    /* Centra el texto. */
+    text-align: center;
+
+    /* Reserva espacio aunque no exista mensaje. */
+    min-height: 25px;
+
+    /* Coloca texto en negrita. */
+    font-weight: bold;
+}
+
+
+/* Panel de Game Over. */
+.game-over {
+
+    /* Define fondo. */
+    background-color: #202027;
+
+    /* Centra texto. */
+    text-align: center;
+
+    /* Agrega espacio interior. */
+    padding: 20px;
+
+    /* Agrega separación superior. */
+    margin-top: 15px;
+
+    /* Redondea. */
+    border-radius: 10px;
+}
+
+
+/* Botón de reintento. */
+#retryButton {
+
+    /* Fondo verde. */
+    background-color: #3e9b5f;
+
+    /* Texto blanco. */
+    color: white;
+
+    /* Agrega margen. */
+    margin: 5px;
+}
+
+
+/* Botón para volver a elegir personaje. */
+#changeCharacterButton {
+
+    /* Fondo azul. */
+    background-color: #367ac2;
+
+    /* Texto blanco. */
+    color: white;
+
+    /* Agrega margen. */
+    margin: 5px;
+}
+
+
+/* Texto que indica el bonus. */
+#bonusStatus {
+
+    /* Coloca el texto en negrita. */
+    font-weight: bold;
+}
+
+
+/* Clase utilizada para ocultar cualquier elemento. */
+.hidden {
+
+    /* Hace que el elemento no se muestre. */
+    display: none;
+}
+
+
+/* Se aplica cuando la pantalla mide como máximo 700 píxeles. */
+@media (max-width: 700px) {
+
+    /* Selecciona las opciones de mejora. */
+    .upgrade-options {
+
+        /* Cambia de tres columnas a una sola. */
+        grid-template-columns: 1fr;
+    }
+}
